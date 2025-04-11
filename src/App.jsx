@@ -3,7 +3,8 @@ import { useEffect, useState } from 'react'
 import Description from './components/Description/Description'
 import Feedback from './components/Feedback/Feedback'
 import Options from './components/Options/Options'
-import Notification from './components/Notification/notification'
+import Notificate from './components/Notificate/Notificate'
+
 
 
 function App() {
@@ -42,7 +43,7 @@ function App() {
     <>
       <Description />
       <Options updateFeedback={updateFeedback} resetMark={resetMark} total={totalFeedback}/>
-      {totalFeedback > 0 ? <Feedback mark={mark} total={totalFeedback} positive={positiveFeedback} /> : <Notification />}
+      {totalFeedback > 0 ? <Feedback mark={mark} total={totalFeedback} positive={positiveFeedback} /> : <Notificate />}
     </>
   )
 }
