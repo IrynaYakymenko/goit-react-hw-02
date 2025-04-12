@@ -1,25 +1,14 @@
-
 import { useEffect, useState } from 'react'
 import Description from './components/Description/Description'
 import Feedback from './components/Feedback/Feedback'
 import Options from './components/Options/Options'
-import Notificate from './components/Notificate/Notificate'
-
-
+import Notification from './components/Notification/Notification'
 
 function App() {
-  const [mark, setMark] = useState ({
-    good: 0,
-	  neutral: 0,
-	  bad: 0
-  })
-
-  useEffect(() => {
+  const [mark, setMark] = useState ( () => {
     const savedFeedback = localStorage.getItem('feedbackStats')
-    if (savedFeedback) {
-      setMark(JSON.parse(savedFeedback))
-    }
-  }, [])
+    return savedFeedback ? JSON.parse(savedFeedback) : {good: 0, neutral: 0, bad: 0}
+  })
 
   useEffect(() => {
     localStorage.setItem('feedbackStats', JSON.stringify(mark))
@@ -43,7 +32,7 @@ function App() {
     <>
       <Description />
       <Options updateFeedback={updateFeedback} resetMark={resetMark} total={totalFeedback}/>
-      {totalFeedback > 0 ? <Feedback mark={mark} total={totalFeedback} positive={positiveFeedback} /> : <Notificate />}
+      {totalFeedback > 0 ? <Feedback mark={mark} total={totalFeedback} positive={positiveFeedback} /> : <Notification />}
     </>
   )
 }
